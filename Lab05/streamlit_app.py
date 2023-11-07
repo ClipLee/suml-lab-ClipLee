@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import matplotlib as plt
 import os
+import numpy
 # zaczynamy od zaimportowania bibliotek
 
 st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
@@ -22,7 +23,7 @@ st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
     # st.success('Done')
 # możemy dzięki temu "ukryć" późniejsze ładowanie aplikacji
 
-st.title('Lab05. Streamlit')
+st.title('Lab05. Lipna Aplikacja Streamlit')
 # title, jak sama nazwa wskazuje, używamy do wyświetlenia tytułu naszej aplikacji
 
 st.header('Wprowadzenie do zajęć')
@@ -44,7 +45,7 @@ with st.echo():
     st.write("Echo")
 # możemy też to zrobić prościej używając echo - pokazujemy kod i równocześnie go wykonujemy
 
-df = pd.read_csv("DSP_4.csv", sep = ';')
+df = pd.read_csv("Lab05\DSP_4.csv", sep = ';')
 st.dataframe(df)
 # musimy tylko pamiętać o właściwym określeniu separatora (w tym wypadku to średnik)
 # masz problem z otworzeniem pliku? sprawdź w jakim katalogu pracujesz i dodaj tam plik (albo co bardziej korzystne - zmień katalog pracy)
