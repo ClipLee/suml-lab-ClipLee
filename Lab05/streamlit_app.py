@@ -23,6 +23,8 @@ st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
     # st.success('Done')
 # możemy dzięki temu "ukryć" późniejsze ładowanie aplikacji
 
+st.image('Lab05\mountain.jpg')
+
 st.title('Lab05. Lipna Aplikacja Streamlit')
 # title, jak sama nazwa wskazuje, używamy do wyświetlenia tytułu naszej aplikacji
 
@@ -32,8 +34,10 @@ st.header('Wprowadzenie do zajęć')
 st.subheader('O Streamlit')
 # subheader to jeden z podtytułów wykorzystywnaych w Streamlit
 
-st.text('To przykładowa aplikacja z wykorzystaniem Streamlit')
+# st.text('To przykładowa aplikacja z wykorzystaniem Streamlit')
 # text używamy do wyświetlenia dowolnego tekstu. Można korzystać z polskich znaków.
+
+st.write('Aplikacja służy do tłumaczenia tekstu z języka angielskiego na język niemiecki za pomocą Huggin Face.')
 
 st.write('Streamlit jest biblioteką pozwalającą na uruchomienie modeli uczenia maszynowego.')
 # write używamy również do wyświetlenia tekstu, różnica polega na formatowaniu.
@@ -80,3 +84,5 @@ st.write('🐞 Wpłyń na user experience, dodaj informacje o ładowaniu, sukces
 st.write('🐞 Na końcu umieść swój numer indeksu')
 st.write('🐞 Stwórz nowe repozytorium na GitHub, dodaj do niego swoją aplikację, plik z wymaganiami (requirements.txt)')
 st.write('🐞 Udostępnij stworzoną przez siebie aplikację (https://share.streamlit.io) a link prześlij do prowadzącego')
+
+st.write('👨‍🎓 s20901')
