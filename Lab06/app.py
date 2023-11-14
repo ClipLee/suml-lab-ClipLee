@@ -36,5 +36,18 @@ def main():
         age_slider = st.slider("Wiek", value=50, min_value=0, max_value=100)
         sibsp_slider = st.slider(
             "# Liczba rodzeństwa/partnerów", min_value=0, max_value=8)
-        parch_slider = st.slider("# Liczba rodziców/dzieci", min_value=0, max_value=6)
-        
+        parch_slider = st.slider(
+            "# Liczba rodziców/dzieci", min_value=0, max_value=6)
+        fare_slider = st.slider(
+            "Cena biletu", min_value=0, max_value=500, step=10)
+
+    data = [startTime, filename, model, sex_d, pclass_d, embarked_d] #uzupelnic wszystkie zmienne potrzebne do modelu. Podac kolumny/cechy, do wytrenowania modelu
+    survival = model.predict(data)
+    s_confidence = model.predict_proba(data)
+
+    with prediction:
+        st.header("czy dana osoba przeżyje? {0}".format("Tak" if survival else "Nie")) #mozna dac survival == 1
+        st.subheader("Pewność predyjchu: {0:2f} %".format(s_confidence[0][survival][0]*100))
+
+if __name__ == "__main__":
+    main()
