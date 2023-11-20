@@ -42,7 +42,6 @@ def main():
         fare_slider = st.slider(
             "Cena biletu", min_value=0, max_value=500, step=10)
 
-    # TODO uzupelnic wszystkie zmienne potrzebne do modelu. Podac kolumny/cechy, do wytrenowania modelu
     data = np.array([pclass_radio, age_slider, sibsp_slider,
                     parch_slider, fare_slider, sex_radio])
 
