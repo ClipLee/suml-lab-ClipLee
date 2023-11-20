@@ -4,7 +4,7 @@ from datetime import datetime
 
 startTime = datetime.now()
 
-filename = "model.h5"
+filename = "Lab06/model.h5"
 model = pkl.load(open(filename, 'rb'))
 
 sex_d = {0: "Kobieta", 1: "Mężczyzna"}
@@ -26,11 +26,11 @@ def main():
 
     with left:
         sex_radio = st.radio("Płeć:", list(
-            sex_d.keys(), format_func=lambda x: sex_d[x]))
+            sex_d.keys()), format_func=lambda x: sex_d[x])
         pclass_radio = st.radio("Klasa:", list(
-            pclass_d.keys(), format_func=lambda x: pclass_d[x]))
+            pclass_d.keys()), format_func=lambda x: pclass_d[x])
         embarked_radio = st.radio("Port:", list(
-            embarked_d.keys(), index=2, format_func=lambda x: embarked_d[x]))
+            embarked_d.keys()), index=2, format_func=lambda x: embarked_d[x])
 
     with right:
         age_slider = st.slider("Wiek", value=50, min_value=0, max_value=100)
@@ -41,13 +41,17 @@ def main():
         fare_slider = st.slider(
             "Cena biletu", min_value=0, max_value=500, step=10)
 
-    data = [startTime, filename, model, sex_d, pclass_d, embarked_d] #uzupelnic wszystkie zmienne potrzebne do modelu. Podac kolumny/cechy, do wytrenowania modelu
+    # TODO uzupelnic wszystkie zmienne potrzebne do modelu. Podac kolumny/cechy, do wytrenowania modelu
+    data = [startTime, filename, model, sex_d, pclass_d, embarked_d]
     survival = model.predict(data)
     s_confidence = model.predict_proba(data)
 
     with prediction:
-        st.header("czy dana osoba przeżyje? {0}".format("Tak" if survival else "Nie")) #mozna dac survival == 1
-        st.subheader("Pewność predyjchu: {0:2f} %".format(s_confidence[0][survival][0]*100))
+        st.header("czy dana osoba przeżyje? {0}".format(
+            "Tak" if survival else "Nie"))  # mozna dac survival == 1
+        st.subheader("Pewność predyjchu: {0:2f} %".format(
+            s_confidence[0][survival][0]*100))
+
 
 if __name__ == "__main__":
     main()
