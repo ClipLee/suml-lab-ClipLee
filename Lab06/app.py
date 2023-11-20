@@ -30,7 +30,7 @@ def main():
             sex_d.keys()), format_func=lambda x: sex_d[x])
         pclass_radio = st.radio("Klasa:", list(
             pclass_d.keys()), format_func=lambda x: pclass_d[x])
-        embarked_radio = st.radio("Port:", list( # czy embarked ma tu sens? nie ma go w modelu
+        embarked_radio = st.radio("Port:", list(  # czy embarked ma tu sens? nie ma go w modelu
             embarked_d.keys()), index=2, format_func=lambda x: embarked_d[x])
 
     with right:
@@ -43,25 +43,28 @@ def main():
             "Cena biletu", min_value=0, max_value=500, step=10)
 
     # TODO uzupelnic wszystkie zmienne potrzebne do modelu. Podac kolumny/cechy, do wytrenowania modelu
-    # data = np.array([sex_radio, pclass_radio, embarked_radio, age_slider, sibsp_slider, parch_slider, fare_slider])
-    data = np.array([pclass_radio,age_slider,sibsp_slider,parch_slider,fare_slider, sex_radio])
-    
-    # data = np.array([pclass_radio, age_slider, sibsp_slider,
-    #                 parch_slider,  embarked_radio, sex_radio])
+    data = np.array([pclass_radio, age_slider, sibsp_slider,
+                    parch_slider, fare_slider, sex_radio])
+
     survival = model.predict([data])
     s_confidence = model.predict_proba([data])
 
     with prediction:
         if survival:
-            st.markdown("<h2> Czy dana osoba przeżyje?: <span style='color: green;'>TAK</span></h2>", unsafe_allow_html=True)
+            st.markdown(
+                "<h2> Czy dana osoba przeżyje?: <span style='color: green;'>TAK</span></h2>", unsafe_allow_html=True)
         else:
-            st.markdown("<h2>Czy dana osoba przeżyje?: <span style='color: red;'>NIE</span></h2>", unsafe_allow_html=True)  # mozna dac survival == 1
-        
+            st.markdown("<h2>Czy dana osoba przeżyje?: <span style='color: red;'>NIE</span></h2>",
+                        unsafe_allow_html=True)  # mozna dac survival == 1
+
         # st.subheader("Pewność predyktu: {0:2f} %".format(
         #     s_confidence[0][survival][0]*100))
+
         confidence = s_confidence[0][survival][0]*100
-        color = f'hsl({120 * confidence / 100}, 100%, 50%)'  # HSL color: Hue, Saturation, Lightness
-        st.markdown(f"<h2 style='color: {color};'>Pewność predykcji: {confidence:.2f} %</h2>", unsafe_allow_html=True)
+        # HSL color: Hue, Saturation, Lightness
+        color = f'hsl({120 * confidence / 100}, 100%, 50%)'
+        st.markdown(
+            f"<h2 style='color: {color};'>Pewność predykcji: {confidence:.2f} %</h2>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
