@@ -9,7 +9,7 @@ import os
 
 
 def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
-    
+
     # zapisanie danych do pliku CSV
     data = np.column_stack((x, y))
     df = pd.DataFrame(data, columns=['x', 'y'])
@@ -17,6 +17,7 @@ def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
 
     # wczytanie danych treningowych
     dataset = pd.read_csv('10_points.csv')
+    # TODO uniwersalna nazwa pliku
 
     x_train = df['x'].values.reshape(-1, 1)
     y_train = df['y'].values.reshape(-1, 1)
@@ -31,8 +32,8 @@ def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
     # wczytanie poprzedniego i trenowanie modelu
     if os.path.exists(model_path):
         # wczytanie istniejącego modelu
-        print('✔... Model was found ...✔')
-        print('...Loading existing model...')
+        print('✔     Model was found     ✔')
+        print('...Loading existing model...\n')
         model = pk.load(open(model_path, 'rb'))
     else:
         # trenowanie nowego modelu
@@ -48,52 +49,9 @@ def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
     print('b = ', model.intercept_[0])
 
     # zapisanie nowego modelu
-    print('...Saving model...')
+    print('\n...  Saving model  ...')
     pk.dump(model, open('Lab07 - code_refactoring/our_model.pkl', 'wb'))
-
-
-# wywołanie funkcji
-save_data_and_train_model()
-    # zapisanie danych do pliku CSV
-    data = np.column_stack((x, y))
-    df = pd.DataFrame(data, columns=['x', 'y'])
-    df.to_csv('10_points.csv', mode='a', index=False, header=False)
-
-    # wczytanie danych treningowych
-    dataset = pd.read_csv('10_points.csv')
-
-    x_train = df['x'].values.reshape(-1, 1)
-    y_train = df['y'].values.reshape(-1, 1)
-
-    # domyślna ścieżka do modelu
-    default_model_path = 'Lab07 - code_refactoring/our_model.pkl'
-
-    # jeśli użytkownik nie podał ścieżki, użyj domyślnej
-    if model_path is None:
-        model_path = default_model_path
-
-    # wczytanie poprzedniego i trenowanie modelu
-    if os.path.exists(model_path):
-        # wczytanie istniejącego modelu
-        print('✔... Model was found ...✔')
-        print('...Loading existing model...')
-        model = pk.load(open(model_path, 'rb'))
-    else:
-        # trenowanie nowego modelu
-        print('❌..Model not found..❌')
-        print('...Training new model...')
-        model = LinearRegression()
-        model.fit(x_train, y_train)
-
-    model.fit(x_train, y_train)
-
-    print('y = a * x + b')
-    print('a = ', model.coef_[0][0])
-    print('b = ', model.intercept_[0])
-
-    # zapisanie nowego modelu
-    print('...Saving model...')
-    pk.dump(model, open('Lab07 - code_refactoring/our_model.pkl', 'wb'))
+    print('✔     Model saved     ✔')
 
 
 # wywołanie funkcji
