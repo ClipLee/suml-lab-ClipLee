@@ -8,7 +8,8 @@ import os
 # TODO napisać aplikację konsolową, która wykorzystuje tę funkcję
 
 
-def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
+def save_data_and_train_model(x, y, model_path=None):
+# def save_data_and_train_model(x=[1, 2, 3], y=[4, 5, 6], model_path=None):
 
     # zapisanie danych do pliku CSV
     data = np.column_stack((x, y))
