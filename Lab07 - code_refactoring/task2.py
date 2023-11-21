@@ -2,10 +2,11 @@
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import pandas as pd
-import pickle
+import pickle as pk
+import os
 
 
-def save_data_and_train_model(x, y): # przyjmuje dowolne wartosci x i y
+def save_data_and_train_model(x, y):  # przyjmuje dowolne wartosci x i y
 
     # zapisanie danych do pliku CSV
     data = np.column_stack((x, y))
@@ -18,20 +19,32 @@ def save_data_and_train_model(x, y): # przyjmuje dowolne wartosci x i y
     x_train = df['x'].values.reshape(-1, 1)
     y_train = df['y'].values.reshape(-1, 1)
 
-    # trenowanie modelu
-    model = LinearRegression()
+    # wczytanie poprzedniego i trenowanie modelu
+    model_path = 'Lab07 - code_refactoring/our_model.pkl'
+    if os.path.exists(model_path):
+        # wczytanie istniejącego modelu
+        print('✔... Model was found ...✔')
+        print('...Loading existing model...')
+        model = pk.load(open(model_path, 'rb'))
+    else:
+        # trenowanie nowego modelu
+        print('❌..Model not found..❌')
+        print('...Training new model...')
+        model = LinearRegression()
+        model.fit(x_train, y_train)
+
     model.fit(x_train, y_train)
 
-    print('y = a*x +b')
+    print('y = a * x + b')
     print('a = ', model.coef_[0][0])
     print('b = ', model.intercept_[0])
 
     # zapisanie nowego modelu
     print('...Saving model...')
-    pickle.dump(model, open('Lab07 - code_refactoring/our_model.pkl', 'wb'))
+    pk.dump(model, open('Lab07 - code_refactoring/our_model.pkl', 'wb'))
 
 
-# Przykładowe wywołanie funkcji
+# wywołanie funkcji
 x = np.array([1, 2, 3])
 y = np.array([4, 5, 6])
 save_data_and_train_model(x, y)
