@@ -5,7 +5,6 @@ import pickle as pk
 import os
 
 # TODO stworzyć bardziej uniwersalny i przydatny model z wczytywaniem ścieżek domyślnej i użytkownika
-# TODO napisać aplikację konsolową, która wykorzystuje tę funkcję. Importuje funkcje i używam w 1 aplikacji.
 
 
 def save_data_and_train_model(x, y, model_path=None, file_name=None):
@@ -24,6 +23,7 @@ def save_data_and_train_model(x, y, model_path=None, file_name=None):
     df.to_csv('10_points.csv', mode='a', index=False, header=False)
 
     # wczytanie danych treningowych
+    # TODO czy jest to potrzebne, skoro zawiera się to w ścieżce?
     dataset = pd.read_csv(file_name)
 
     x_train = df['x'].values.reshape(-1, 1)
@@ -61,7 +61,7 @@ def save_data_and_train_model(x, y, model_path=None, file_name=None):
     print('✔     Model saved     ✔')
 
 
-# wywołanie funkcji
-x = np.array([1, 2, 3])
-y = np.array([4, 5, 6])
-save_data_and_train_model(x, y)
+# # wywołanie funkcji
+# x = np.array([1, 2, 3])
+# y = np.array([4, 5, 6])
+# save_data_and_train_model(x, y)

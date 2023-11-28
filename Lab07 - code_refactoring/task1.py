@@ -12,7 +12,7 @@ def predict_y(x):
     return y
 
 
-# test
-x = np.array([[1, 2, 3]])  # jaki input
-predicted_y = predict_y(x)
-print(predicted_y)
+# # test
+# x = np.array([[1, 2, 3]])  # jaki input
+# predicted_y = predict_y(x)
+# print(predicted_y)
