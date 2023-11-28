@@ -2,10 +2,12 @@
 # upewnic sie ze jestes w katalogu i odpalic za pomoca `uvicorn app:app --reload`
 
 from typing import Union
+from libs.task1 import train, get_predict
+from libs.task2 import train, get_predict
+
 
 from fastapi import FastAPI, HTTPException, Form
 from typing import Annotated
-from libs.model import train, predict
 import uvicorn
 
 from models.point import Point
@@ -22,6 +24,7 @@ app = FastAPI()
 @app.get("/", tags=["into"])
 async def index():
     return {"message": "Linear Regression ML"}
+
 
 @app.get("/Lab08/.../point", response_model=Point, status_code=200)
 async def poin(x: Annotated[int, Form()], y: Annotated[int, Form()]):
