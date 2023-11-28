@@ -1,5 +1,14 @@
-# fastapi==0.91.1
 fastapi
-uvicorn==0.24.0
-redis
-types-redis
+# fastapi==0.91.1
+
+uvicorn
+# uvicorn==0.24.0
+
+pandas
+# pandas==1.3.0
+
+scikit-learn
+# scikit-learn==1.3.0
+
+python-multipart
+# python-multipart==0.0.6

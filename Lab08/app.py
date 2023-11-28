@@ -23,8 +23,9 @@ app = FastAPI()
 async def index():
     return {"message": "Linear Regression ML"}
 
-@async def poin(x: Annotated[int, Form()], y: Annotated[int, Form()]):
-return Point(x=x, y=y)
+@app.get("/Lab08/.../point", response_model=Point, status_code=200)
+async def poin(x: Annotated[int, Form()], y: Annotated[int, Form()]):
+    return Point(x=x, y=y)
 
 
 @app.post("model/train", tags=["model"], status_code=200)
