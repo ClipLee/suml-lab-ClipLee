@@ -1,3 +1,5 @@
-fastapi=0.91.1
-uvicorn=0.24.0
-
+# fastapi==0.91.1
+fastapi
+uvicorn==0.24.0
+redis
+types-redis
