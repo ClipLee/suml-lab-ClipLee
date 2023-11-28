@@ -5,7 +5,7 @@ import pickle as pk
 import os
 
 # TODO stworzyć bardziej uniwersalny i przydatny model z wczytywaniem ścieżek domyślnej i użytkownika
-# TODO napisać aplikację konsolową, która wykorzystuje tę funkcję
+# TODO napisać aplikację konsolową, która wykorzystuje tę funkcję. Importuje funkcje i używam w 1 aplikacji.
 
 
 def save_data_and_train_model(x, y, model_path=None, file_name=None):
@@ -25,7 +25,6 @@ def save_data_and_train_model(x, y, model_path=None, file_name=None):
 
     # wczytanie danych treningowych
     dataset = pd.read_csv(file_name)
-    # TODO uniwersalna nazwa pliku
 
     x_train = df['x'].values.reshape(-1, 1)
     y_train = df['y'].values.reshape(-1, 1)
