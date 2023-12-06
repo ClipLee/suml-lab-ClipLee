@@ -1,10 +1,7 @@
 # kod naszego apifrom fastapi import FastAPI
 # upewnic sie ze jestes w katalogu i odpalic za pomoca `uvicorn app:app --reload`
 
-from typing import Union
-from libs.task1 import train, get_predict
-from libs.task2 import train, get_predict
-
+from libs.model import train, predict
 
 from fastapi import FastAPI, HTTPException, Form
 from typing import Annotated
@@ -13,6 +10,8 @@ import uvicorn
 from models.point import Point
 
 from pathlib import Path
+
+from typing import Annotated
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 MODEL_DIR = Path(BASE_DIR).joinpath("ml_models")
@@ -26,7 +25,7 @@ async def index():
     return {"message": "Linear Regression ML"}
 
 
-@app.get("/Lab08/.../point", response_model=Point, status_code=200)
+@app.post("/Lab08/.../point", tags=["data"], response_model=Point, status_code=200)
 async def poin(x: Annotated[int, Form()], y: Annotated[int, Form()]):
     return Point(x=x, y=y)
 
@@ -56,9 +55,10 @@ async def get_prediction(data: Point, model_name="our_model"):
     data = data.dict()
     x = data["X"]
 
-    y_pred = get_predict(x=x, ml_model=model_file)
+    y_pred = predict(x=x, ml_model=model_file)
     data["y"] = y_pred[0][0]
 
+    response_object = {"x": x, "y": y_pred[0][0]}
     return Point(x=x, y=y_pred[0][0])
 
 if __name__ == "__main__":
