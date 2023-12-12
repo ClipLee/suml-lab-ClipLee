@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import accuracy_score
 
-# TODO: Remove note: aby odpalic serwer `mlflow server --host 127.0.0.1 --port 8080`
+# To launch the server: `mlflow server --host 127.0.0.1 --port 8080`
 
 dsp6 = pd.read_csv('Lab10/data/DSP_6_Clean.csv')
 print(dsp6)
@@ -59,8 +59,9 @@ acc_lreg = accuracy_score(y_test, y2_predict)
 acc_tree = accuracy_score(y_test, y3_predict)
 
 # server address settings
-# mlflow.set_tracking_uri("http://localhost:5000")
-mlflow.set_tracking_uri("http://127.0.0.1:8080")
+# mlflow.set_tracking_uri(url="http://127.0.0.1:8080")
+mlflow.set_tracking_uri("http://localhost:8080")
+# mlflow.set_tracking_uri("http://127.0.0.1:8080")
 
 # experiment settings
 mlflow.set_experiment("Mlflow Titanic")
