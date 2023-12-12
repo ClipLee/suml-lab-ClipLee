@@ -1,0 +1,97 @@
+import mlflow
+from mlflow.models import infer_signature
+from numpy import sign
+
+import pandas as pd
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import accuracy_score
+
+dsp6 = pd.read_csv('Lab10/data/DSP_6.csv')
+print(dsp6)
+
+x = dsp6.drop(['Survived'], axis=1)
+y = dsp6['Survived']
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.10, random_state=101)
+
+params_forest = {
+    'n_estimators': 10,
+    'random_state': 0,
+}
+
+params_lreg = {
+    "max_iter": 500,
+    "random_state": 0,
+    "solver": "lbfgs",
+}
+
+# training
+forest = RandomForestClassifier(**params_forest)
+forest.fit(x_train, y_train)
+score_forest = forest.score(x_test, y_test)
+
+lreg = LogisticRegression(**params_lreg)
+lreg.fit(x_train, y_train)
+score_lreg = lreg.score(x_test, y_test)
+
+tree = DecisionTreeClassifier()
+tree.fit(x_train, y_train)
+score_tree = tree.score(x_test, y_test)
+
+# prediction
+y1_predict = forest.predict(x_test)
+y2_predict = lreg.predict(x_test)
+y3_predict = tree.predict(x_test)
+
+# metrics
+acc_forest = accuracy_score(y_test, y1_predict)
+acc_lreg = accuracy_score(y_test, y2_predict)
+acc_tree = accuracy_score(y_test, y3_predict)
+
+# server address settings
+# mlflow.set_tracking_uri("http://localhost:5000")
+mlflow.set_tracking_uri("http://127.0.0.1:8080")
+
+# experiment settings
+mlflow.set_experiment("Mlflow Titanic")
+
+# run mlflow
+with mlflow.start_run():
+    # register hyperparameters
+    mlflow.log_param(params_forest)
+    mlflow.log_param(params_lreg)
+
+    # register acc
+    mlflow.log_metric("acc_forest", acc_forest)
+    mlflow.log_metric("acc_lreg", acc_lreg)
+    mlflow.log_metric("acc_tree", acc_tree)
+
+    # tag settings
+    mlflow.set_tag("training info", "standard models: random forests, logistic regression, decision tree for Titanic data")
+
+    # tags settings to descrite results
+    sign_forest = infer_signature(x_train, y1_predict)
+    sign_lreg = infer_signature(x_train, y2_predict)
+    sign_tree = infer_signature(x_train, y3_predict)
+
+    # register models
+    model_info_forest = mlflow.sklearn.log_model(
+        sk_model = forest,
+        artifact_path="titanic_model_forest",
+        signature=sign_forest,
+        input_example=x_train,
+        registered_model_name="titanic_ml_forest"
+    )
+
+    model_info_lreg = mlflow.sklearn.log_model(
+        sk_model = lreg,
+        artifact_path="titanic_model_lreg",
+        signature=sign_lreg,
+        input_example=x_train,
+        registered_model_name="titanic_ml_lreg"
+    )
