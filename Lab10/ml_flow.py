@@ -1,3 +1,5 @@
+from json import load
+from unittest import result
 import mlflow
 from mlflow.models import infer_signature
 from numpy import sign
@@ -10,6 +12,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import accuracy_score
+
+# TODO: Remove note: aby odpalic serwer `mlflow server --host 127.0.0.1 --port 808`
 
 dsp6 = pd.read_csv('Lab10/data/DSP_6.csv')
 print(dsp6)
@@ -95,3 +99,19 @@ with mlflow.start_run():
         input_example=x_train,
         registered_model_name="titanic_ml_lreg"
     )
+
+# load model
+loaded_model_forest = mlflow.pyfunc.load_model(model_info_forest.model_url)
+loaded_model_lreg = mlflow.pyfunc.load_model(model_info_lreg.model_url)
+loaded_model_tree = mlflow.pyfunc.load_model(model_info_tree.model_url)
+
+pred1 = loaded_model_forest.predict(x_test)
+pred2 = loaded_model_lreg.predict(x_test)
+pred3 = loaded_model_tree.predict(x_test)
+
+titanic_acc = ["Random Forest", "Logistic Regression", "Decision Tree"]
+
+result = pd.DataFrame()
+result[titanic_acc[0]] = pred1
+result[titanic_acc[1]] = pred2
+result[titanic_acc[2]] = pred3
