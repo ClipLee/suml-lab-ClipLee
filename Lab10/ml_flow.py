@@ -21,7 +21,8 @@ print(dsp6)
 x = dsp6.drop(['Survived'], axis=1)
 y = dsp6['Survived']
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.10, random_state=101)
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.10, random_state=101)
 
 params_forest = {
     'n_estimators': 10,
@@ -76,7 +77,8 @@ with mlflow.start_run():
     mlflow.log_metric("acc_tree", acc_tree)
 
     # tag settings
-    mlflow.set_tag("training info", "standard models: random forests, logistic regression, decision tree for Titanic data")
+    mlflow.set_tag(
+        "training info", "standard models: random forests, logistic regression, decision tree for Titanic data")
 
     # tags settings to descrite results
     sign_forest = infer_signature(x_train, y1_predict)
@@ -85,7 +87,7 @@ with mlflow.start_run():
 
     # register models
     model_info_forest = mlflow.sklearn.log_model(
-        sk_model = forest,
+        sk_model=forest,
         artifact_path="titanic_model_forest",
         signature=sign_forest,
         input_example=x_train,
@@ -93,7 +95,7 @@ with mlflow.start_run():
     )
 
     model_info_lreg = mlflow.sklearn.log_model(
-        sk_model = lreg,
+        sk_model=lreg,
         artifact_path="titanic_model_lreg",
         signature=sign_lreg,
         input_example=x_train,
