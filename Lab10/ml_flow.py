@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score
 
 # TODO: Remove note: aby odpalic serwer `mlflow server --host 127.0.0.1 --port 808`
 
-dsp6 = pd.read_csv('Lab10/data/DSP_6.csv')
+dsp6 = pd.read_csv('Lab10/data/train.csv')
 print(dsp6)
 
 x = dsp6.drop(['Survived'], axis=1)
