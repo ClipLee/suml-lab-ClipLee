@@ -1,0 +1,9 @@
+pandas
+numpy
+os
+pickle
+matplotlib
+seaborn
+cufflinks
+scikit-learn
+nbformat
