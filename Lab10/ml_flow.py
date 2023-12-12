@@ -13,9 +13,9 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import accuracy_score
 
-# TODO: Remove note: aby odpalic serwer `mlflow server --host 127.0.0.1 --port 808`
+# TODO: Remove note: aby odpalic serwer `mlflow server --host 127.0.0.1 --port 8080`
 
-dsp6 = pd.read_csv('Lab10/data/train.csv')
+dsp6 = pd.read_csv('Lab10/data/DSP_6_Clean.csv')
 print(dsp6)
 
 x = dsp6.drop(['Survived'], axis=1)
@@ -38,15 +38,15 @@ params_lreg = {
 # training
 forest = RandomForestClassifier(**params_forest)
 forest.fit(x_train, y_train)
-score_forest = forest.score(x_test, y_test)
+score_forest = forest.score(x_train, y_train)
 
 lreg = LogisticRegression(**params_lreg)
 lreg.fit(x_train, y_train)
-score_lreg = lreg.score(x_test, y_test)
+score_lreg = lreg.score(x_train, y_train)
 
 tree = DecisionTreeClassifier()
 tree.fit(x_train, y_train)
-score_tree = tree.score(x_test, y_test)
+score_tree = tree.score(x_train, y_train)
 
 # prediction
 y1_predict = forest.predict(x_test)
