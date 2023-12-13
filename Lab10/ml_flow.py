@@ -1,4 +1,6 @@
+from inspect import signature
 from json import load
+from pyexpat import model
 from unittest import result
 import mlflow
 from mlflow.models import infer_signature
@@ -59,7 +61,7 @@ acc_lreg = accuracy_score(y_test, y2_predict)
 acc_tree = accuracy_score(y_test, y3_predict)
 
 # server address settings
-# mlflow.set_tracking_uri(url="http://127.0.0.1:8080")
+
 mlflow.set_tracking_uri("http://localhost:8080")
 # mlflow.set_tracking_uri("http://127.0.0.1:8080")
 
@@ -69,8 +71,8 @@ mlflow.set_experiment("Mlflow Titanic")
 # run mlflow
 with mlflow.start_run():
     # register hyperparameters
-    mlflow.log_param(params_forest)
-    mlflow.log_param(params_lreg)
+    mlflow.log_params(params_forest)
+    mlflow.log_params(params_lreg)
 
     # register acc
     mlflow.log_metric("acc_forest", acc_forest)
@@ -102,11 +104,19 @@ with mlflow.start_run():
         input_example=x_train,
         registered_model_name="titanic_ml_lreg"
     )
+    
+    model_info_tree = mlflow.sklearn.log_model(
+        sk_model=tree,
+        artifact_path="titanic_model_tree",
+        signature=sign_tree,
+        input_example=x_train,
+        registered_model_name="titanic_ml_tree"
+    )
 
 # load model
-loaded_model_forest = mlflow.pyfunc.load_model(model_info_forest.model_url)
-loaded_model_lreg = mlflow.pyfunc.load_model(model_info_lreg.model_url)
-loaded_model_tree = mlflow.pyfunc.load_model(model_info_tree.model_url)
+loaded_model_forest = mlflow.pyfunc.load_model(model_info_forest.model_uri)
+loaded_model_lreg = mlflow.pyfunc.load_model(model_info_lreg.model_uri)
+loaded_model_tree = mlflow.pyfunc.load_model(model_info_tree.model_uri)
 
 pred1 = loaded_model_forest.predict(x_test)
 pred2 = loaded_model_lreg.predict(x_test)

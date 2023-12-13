@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1702487721192
+current_stage: None
+description: ''
+last_updated_timestamp: 1702487721192
+name: titanic_ml_lreg
+run_id: f2f540fbb68c4f0c964923e4d749e805
+run_link: ''
+source: mlflow-artifacts:/504838103658452799/f2f540fbb68c4f0c964923e4d749e805/artifacts/titanic_model_lreg
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/504838103658452799/f2f540fbb68c4f0c964923e4d749e805/artifacts/titanic_model_lreg
+user_id: null
+version: 1

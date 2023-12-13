@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1702487869919
+current_stage: None
+description: ''
+last_updated_timestamp: 1702487869919
+name: titanic_ml_tree
+run_id: 06f508f540cd4252be5f24a326a2645b
+run_link: ''
+source: mlflow-artifacts:/504838103658452799/06f508f540cd4252be5f24a326a2645b/artifacts/titanic_model_tree
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/504838103658452799/06f508f540cd4252be5f24a326a2645b/artifacts/titanic_model_tree
+user_id: null
+version: 2

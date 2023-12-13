@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1702487860617
+current_stage: None
+description: ''
+last_updated_timestamp: 1702487860617
+name: titanic_ml_forest
+run_id: 06f508f540cd4252be5f24a326a2645b
+run_link: ''
+source: mlflow-artifacts:/504838103658452799/06f508f540cd4252be5f24a326a2645b/artifacts/titanic_model_forest
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/504838103658452799/06f508f540cd4252be5f24a326a2645b/artifacts/titanic_model_forest
+user_id: null
+version: 2
