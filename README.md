@@ -1,3 +1,5 @@
+<!-- https://classroom.github.com/online_ide?assignment_repo_id=12181533&assignment_repo_type=AssignmentRepo -->
+
 # AI & ML Labs
 
 To  repozytorium zawiera różne laboratoria i zadania związane z uczeniem maszynowym i analizą danych, które zostały przeprowadzone w celu nauki i praktyki dziedzin data scienece i machine learning.
